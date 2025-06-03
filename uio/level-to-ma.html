@@ -1,0 +1,117 @@
+<script type="text/javascript">
+    RED.nodes.registerType('level-to-ma', {
+      category: 'Smartlink UIO',
+      color: '#c0deed',
+      defaults: {
+        name: {value: ""},
+        mode: {value: "distance", required: true},
+        unit: {value: "m"},
+        min: {value: 0},
+        max: {value: 5},
+        tankHeight: {value: 5}
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "function.png",
+      paletteLabel: "Level to mA",
+      label: function () {
+          return this.name || 'Level to mA';
+      },
+      oneditprepare: function() {
+        $("#node-input-mode").change(function() {
+          const mode = $(this).val();
+          if (mode === "distance") {
+            $(".distance-options").show();
+            $(".level-options").hide();
+          } else {
+            $(".distance-options").hide();
+            $(".level-options").show();
+          }
+        }).trigger("change");
+      }
+    });
+  </script>
+
+  <script type="text/x-red" data-template-name="level-to-ma">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    
+    <div class="form-row">
+      <label for="node-input-mode"><i class="fa fa-cogs"></i> Mode</label>
+      <select id="node-input-mode">
+        <option value="distance">Distance</option>
+        <option value="level">Level</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label for="node-input-unit"><i class="fa fa-ruler"></i> Input Unit</label>
+      <select id="node-input-unit">
+        <option value="m">meters</option>
+        <option value="cm">centimeters</option>
+        <option value="mm">millimeters</option>
+      </select>
+    </div>
+    
+    <div class="form-row distance-options">
+      <label for="node-input-min">Min distance (m)</label>
+      <input type="number" id="node-input-min">
+    </div>
+    
+    <div class="form-row distance-options">
+      <label for="node-input-max">Max distance (m)</label>
+      <input type="number" id="node-input-max">
+    </div>
+    
+    <div class="form-row level-options">
+      <label for="node-input-tankHeight">Tank Height (m)</label>
+      <input type="text" id="node-input-tankHeight" >
+    </div>
+  </script>
+  
+  <script type="text/x-red" data-help-name="level-to-ma">
+    <p>
+      This node converts a measured <strong>distance</strong> or <strong>level</strong> input into a corresponding <strong>4–20 mA analog signal</strong> equivalent.
+    </p>
+  
+    <p>
+      The node supports two operating modes:
+      </p>
+      <ul>
+        <li><strong>Distance Mode:</strong> Converts a distance reading to mA output based on user-defined <strong>minimum</strong> and <strong>maximum</strong> thresholds.</li>
+        <li><strong>Level Mode:</strong> Calculates level as the difference between <strong>tank/container height</strong> and the measured distance. Outputs corresponding mA value.</li>
+      </ul>
+    
+    <p>
+      You can also select the unit of the incoming measured input (e.g., mm, cm, m).
+    </p>
+  
+    <p>
+      <strong>Output Format:</strong><br/>
+      The node outputs an object with the following structure:
+    </p>
+  
+    <code>
+    {
+      "readingToMeter": 1.989,
+      "value": 8.011,
+      "percent": 80.11,
+      "mA": 16.82
+    }
+    </code>
+  
+    <ul>
+      <li><strong>readingToMeter:</strong> Measured input converted to meters</li>
+      <li><strong>value:</strong> Calculated level or distance (depending on mode), in meters</li>
+      <li><strong>percent:</strong> Scaled percentage from 0 to 100%</li>
+      <li><strong>mA:</strong> Final calculated analog output in mA (scaled between 4–20)</li>
+    </ul>
+  
+    <p>
+      The node also supports variable input using environment-style placeholders such as <code>${TankHeight}</code> for dynamic configuration.
+    </p>
+  </script>
+  
+  

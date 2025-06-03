@@ -1,0 +1,74 @@
+<script type="text/javascript">
+    RED.nodes.registerType('gateway', {
+      category: 'config',
+      color: '#d8bfd8',
+      defaults: {
+        name: { value: "" },
+        serialPort: { value: "/dev/ttyAMA1", required: true },
+        baudRate: { value: 115200, required: true },
+        mqttHost: { value: "mqtt://localhost" },
+        mqttTopic: { value: "application/+/device/+/event/up" },
+        modbusEnabled: { value: false },
+        modbusPort: {
+            value: 8502,
+            validate: function (v) {
+                if (this.modbusEnabled) {
+                    return Number(v) > 0 && Number(v) <= 65535;
+                }
+                return true;
+            }
+        }
+      },
+    //   inputs: 0,
+    //   outputs: 1,
+    //   icon: "font-awesome/fa-plug",
+      paletteLabel: "UIO Gateway",
+      label: function () {
+        return this.name || "UIO Gateway";
+      },
+      oneditprepare: function() {
+        $("#node-input-modbusEnabled").change(function() {
+          if ($(this).is(":checked")) {
+            $("#modbus-port-row").show();
+        } else {
+            $("#modbus-port-row").hide();
+        }
+        }).trigger("change");
+      }
+    });
+  </script>
+  
+  <script type="text/x-red" data-template-name="gateway">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" />
+    </div>
+    <div class="form-row">
+      <label for="node-input-serialPort"><i class="fa fa-usb"></i> Serial Port</label>
+      <input type="text" id="node-input-serialPort" placeholder="/dev/ttyAMA1" />
+    </div>
+    <div class="form-row">
+      <label for="node-input-baudRate"><i class="fa fa-cogs"></i> Baud Rate</label>
+      <input type="number" id="node-input-baudRate" placeholder="115200" />
+    </div>
+    <div class="form-row">
+      <label for="node-input-mqttHost"><i class="fa fa-globe"></i> MQTT Broker</label>
+      <input type="text" id="node-input-mqttHost" placeholder="mqtt://localhost">
+    </div>
+    <div class="form-row">
+      <label for="node-input-mqttTopic"><i class="fa fa-filter"></i> MQTT Topic</label>
+      <input type="text" id="node-input-mqttTopic" placeholder="application/+/device/+/event/up">
+    </div>
+    <div class="form-row">
+      <label for="node-input-modbusEnabled"><i class="fa fa-plug"></i> Modbus Server</label>
+      <input type="checkbox" id="node-input-modbusEnabled" style="width:auto;">
+    </div>
+    <div class="form-row" id="modbus-port-row">
+      <label for="node-input-modbusPort"><i class="fa fa-hashtag"></i> Modbus Port</label>
+      <input type="number" id="node-input-modbusPort" placeholder="8502" min="1" max="65535">
+  </div>
+  
+  </script>
+  
+ 
+  

@@ -1,0 +1,21 @@
+{
+  "name": "node-red-contrib-minelert-uio",
+  "version": "0.1.0",
+  "description": "Node-RED nodes for Universal IO Gateway and I/O Modules",
+  "dependencies": {
+    "serialport": "^13.0.0",
+    "mqtt":"^5.13.0",
+    "jsmodbus": "^4.0.10",
+    "@smartlink/common": "^1.0.0"
+  },
+  "keywords": ["node-red", "gateway", "serial", "modular", "io"],
+  "node-red": {
+    "nodes": {
+      "gateway": "gateway.js",
+      "analog-out": "analog-out.js",
+      "level-to-ma": "level-to-ma.js"
+    }
+  },
+  "author": "Niel Venter <niel@profiteksa.com>",
+  "license": "MIT"
+}

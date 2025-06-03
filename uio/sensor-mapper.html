@@ -1,0 +1,56 @@
+<script type="text/javascript">
+    RED.nodes.registerType('sensor-mapper', {
+      category: 'config',
+      defaults: {
+        name: { value: "" },
+        devEUI: { value: "", required: true },
+        startRegister: { value: 0, required: true, validate: RED.validators.number() },
+        dataType: {
+          value: "int",
+          required: true,
+          validate: function (v) {
+            return ["int", "float", "bool"].includes(v);
+          }
+        }
+      },
+      label: function () {
+        return this.name || this.devEUI || "Sensor Mapper";
+      }
+    });
+  </script>
+  
+  <script type="text/html" data-template-name="sensor-mapper">
+    <div class="form-row">
+      <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-config-input-name" placeholder="Name">
+    </div>
+  
+    <div class="form-row">
+      <label for="node-config-input-devEUI"><i class="fa fa-microchip"></i> DevEUI</label>
+      <input type="text" id="node-config-input-devEUI" placeholder="DevEUI">
+    </div>
+  
+    <div class="form-row">
+      <label for="node-config-input-startRegister"><i class="fa fa-sliders"></i> Start Register</label>
+      <input type="number" id="node-config-input-startRegister" min="0" placeholder="e.g., 100">
+    </div>
+  
+    <div class="form-row">
+      <label for="node-config-input-dataType"><i class="fa fa-code"></i> Data Type</label>
+      <select id="node-config-input-dataType">
+        <option value="int">Integer</option>
+        <option value="float">Float</option>
+        <option value="bool">Boolean</option>
+      </select>
+    </div>
+  </script>
+  
+  <script type="text/html" data-help-name="sensor-mapper">
+    <p>This configuration maps a LoRaWAN DevEUI to a Modbus register range and value type.</p>
+    <ul>
+      <li><b>DevEUI</b>: Unique device identifier.</li>
+      <li><b>Start Register</b>: Holding register index to begin writing values.</li>
+      <li><b>Data Type</b>: Interpretation format (int, float, bool).</li>
+    </ul>
+  </script>
+  

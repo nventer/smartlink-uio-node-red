@@ -1,0 +1,46 @@
+<script type="text/javascript">
+  RED.nodes.registerType('vega-puls-air', {
+    category: 'Smartlink Vega Sensors',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: "" },
+      devEui: { value: "", required: true },
+      gateway: { type: "gateway", required: true }
+    },
+    inputs: 0,
+    outputs: 1,
+    icon: "sensor.svg",
+    paletteLabel: "VEGAPULS Air 41",
+    label: function() {
+      return this.name || "VEGAPULS Air 41";
+    }
+  });
+</script>
+  
+  <script type="text/x-red" data-template-name="vega-puls-air">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="VegaPULS AIR Sensor">
+    </div>
+    <div class="form-row">
+      <label for="node-input-devEui"><i class="fa fa-id-card"></i> DevEUI</label>
+      <input type="text" id="node-input-devEui" placeholder="e.g. 70b3d57ed0050123">
+    </div>
+    <div class="form-row">
+      <label for="node-input-gateway"><i class="fa fa-random"></i> Gateway</label>
+      <input type="text" id="node-input-gateway">
+    </div>
+  </script>
+  
+  <!-- <script type="text/x-red" data-help-name="sn-lora-level">
+    <p>
+      This node sends analog output values to a module via the serial gateway. It supports 4 output channels (0–3).
+    </p>
+    <p>
+      Provide <code>msg.payload</code> with a numeric value and <code>msg.channel</code> to specify the channel.
+    </p>
+    <p>
+      Example: <code>{ payload: 3.3, channel: 2 }</code> sets channel 2 to 3.3V (or relevant unit).
+    </p>
+  </script> -->
+  

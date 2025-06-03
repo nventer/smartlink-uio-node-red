@@ -1,0 +1,79 @@
+<script type="text/javascript">
+  RED.nodes.registerType('sn-lora-level', {
+    category: 'Smartlink Sensors',
+    color: '#a6bbcf',
+    defaults: {
+      name: { value: "" },
+      devEui: { value: "", required: true },
+      gateway: { type: "gateway", required: true },
+      modbus: { type: "sensor-mapper" }
+    },
+    inputs: 0,
+    outputs: 1,
+    icon: "sensor.svg",
+    paletteLabel: "SN-LORA-L7388",
+    label: function() {
+      return this.name || "SN-LORA-L7388";
+    }
+  });
+</script>
+  
+  <script type="text/x-red" data-template-name="sn-lora-level">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" placeholder="Ultrasonic Sensor">
+    </div>
+    <div class="form-row">
+      <label for="node-input-devEui"><i class="fa fa-id-card"></i> DevEUI</label>
+      <input type="text" id="node-input-devEui" placeholder="e.g. 70b3d57ed0050123">
+    </div>
+    <div class="form-row">
+      <label for="node-input-gateway"><i class="fa fa-random"></i> Gateway</label>
+      <input type="text" id="node-input-gateway">
+    </div>
+  </script>
+  
+  <script type="text/x-red" data-help-name="sn-lora-level">
+    <p>
+      This node represents the Smartlink Level Sensor that transmits <strong>distance</strong> or <strong>level</strong> measurements over a LoRaWAN network.
+    </p>
+  
+    <p>
+      Ensure the sensor is registered on the ChirpStack Network Server (<code>http://gateway-ip:8080</code>) with the correct <strong>Device EUI</strong> and <strong>AppKey</strong>.
+    </p>
+  
+    <p>
+      The node requires a properly configured <strong>Universal IO Gateway</strong> and the <strong>Device EUI</strong> of the sensor to receive upstream messages from the LoRaWAN network.
+    </p>
+  
+    <p>
+      <strong>Sample Payload:</strong><br/>
+      <code>
+        {
+          value: 2000,
+          error: false,
+          unit: mm,
+          batteryVoltage: 3.2,
+          batteryPercent: 85,
+          temperature: 35,
+          txInterval: 30,
+          devEui: "26011BDA12345678",
+          rssi: -95
+        }
+      </code>
+    </p>
+  
+    <ul>
+      <li><strong>value:</strong> Sensor reading in mm (or fault indicator)</li>
+      <li><strong>unit:</strong> Unit of Measure (m, cm, mm)</li>
+      <li><strong>error:</strong> <code>true</code> if read error or sensor fault detected</li>
+      <li><strong>batteryVoltage:</strong> Battery voltage</li>
+      <li><strong>batteryPercent:</strong> Battery percentage</li>
+      <li><strong>temperature:</strong> Internal sensor temperature in °C</li>
+      <li><strong>txInterval:</strong> Transmission interval in seconds</li>
+      <li><strong>devEui:</strong> Device EUI assigned to the sensor</li>
+      <li><strong>rssi:</strong> Received Signal Strength Indicator in dBm</li>
+    </ul>
+  </script>
+  
+  

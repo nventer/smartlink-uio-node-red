@@ -1,0 +1,16 @@
+{
+  "name": "node-red-contrib-minelert-sensors-vega",
+  "version": "0.1.0",
+  "description": "Node-RED nodes for Minelert Universal IO Vega Sensors",
+  "dependencies": {
+    "@smartlink/common": "^1.0.0"
+  },
+  "keywords": ["node-red", "minelert", "smartlink", "sensors", "vega", "lora"],
+  "node-red": {
+    "nodes": {
+      "vega-puls-air": "vega-puls-air.js"
+    }
+  },
+  "author": "Niel Venter <niel@profiteksa.com>",
+  "license": "MIT"
+}

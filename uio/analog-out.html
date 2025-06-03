@@ -1,0 +1,75 @@
+<script type="text/javascript">
+    RED.nodes.registerType('analog-out', {
+      category: 'Smartlink UIO',
+      color: '#FFA000',
+      defaults: {
+        name: { value: '' },
+        gateway: { value:"", type: 'gateway', required: true },
+        moduleId: { value: '', required: true }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: 'font-awesome/fa-sliders',
+      paletteLabel: "MOD-AO-4",
+      label: function () {
+        return this.name || 'MOD-AO-4';
+      }
+    });
+  </script>
+  
+  <script type="text/x-red" data-template-name="analog-out">
+    <div class="form-row">
+      <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+      <input type="text" id="node-input-name" />
+    </div>
+    <div class="form-row">
+      <label for="node-input-gateway"><i class="fa fa-random"></i> Gateway</label>
+      <input type="text" id="node-input-gateway" />
+    </div>
+    <div class="form-row">
+      <label for="node-input-moduleId"><i class="fa fa-cube"></i> Module ID</label>
+      <input type="text" id="node-input-moduleId" />
+    </div>
+  </script>
+  
+  <script type="text/x-red" data-help-name="analog-out">
+    <p>
+      This node sends analog output values to a channel on a Smartlink Universal I/O analog output module via the shared gateway bus.
+    </p>
+  
+    <p>
+      You must configure the following:
+    </p>
+    <ul>
+      <li><strong>Gateway Node:</strong> Reference to the gateway connected to the bus.</li>
+      <li><strong>Device Address:</strong> Address of the I/O module.</li>
+    </ul>
+  
+    <p>
+      <strong>Input Format:</strong><br/>
+      The node expects an incoming message with:
+      <ul>
+        <li><code>msg.payload</code> — the analog value to output (typically in milliamps, e.g., <code>12.5</code>)</li>
+        <li><code>msg.channel</code> — the analog output channel index (0 to 3)</li>
+      </ul>
+    </p>
+  
+    <p>
+      The value in <code>msg.payload</code> will be sent to the specified channel of the I/O module as a 4–20 mA signal.
+    </p>
+  
+    <p>
+      <strong>Important:</strong> Ensure that the channel specified in <code>msg.channel</code> is valid (0–3). Invalid channels will be ignored or may produce an error depending on node configuration.
+    </p>
+  
+    <p>
+      <strong>Typical Use Case:</strong><br/>
+      Connect this node after a converter (e.g. <em>Level-to-mA</em>) to output analog control signals to actuators, transmitters, or PLC inputs over a shared field bus.
+    </p>
+  
+    <p>
+      This node assumes the hardware module is properly wired and supports analog output.
+    </p>
+  </script>
+  
+  
