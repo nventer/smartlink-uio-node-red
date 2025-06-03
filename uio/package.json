@@ -16,6 +16,10 @@
       "level-to-ma": "level-to-ma.js"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nventer/smartlink-uio-node-red"
+  },
   "author": "Niel Venter <niel@profiteksa.com>",
   "license": "MIT"
 }

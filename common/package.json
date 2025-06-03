@@ -2,5 +2,11 @@
   "name": "@smartlink/common",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "commonjs"
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nventer/smartlink-uio-node-red"
+  },
+  "author": "Niel Venter <niel@profiteksa.com>",
+  "license": "MIT"
 }

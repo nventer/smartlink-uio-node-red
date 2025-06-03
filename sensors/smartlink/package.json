@@ -11,6 +11,10 @@
       "sn-lora-level": "sn-lora-level.js"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nventer/smartlink-uio-node-red"
+  },
   "author": "Niel Venter <niel@profiteksa.com>",
   "license": "MIT"
 }
